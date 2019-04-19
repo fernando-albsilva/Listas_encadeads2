@@ -13,6 +13,7 @@ Lista *preenche_lista();
 void busca(Lista *);
 Lista * retira(Lista*,int);
 void imprime_lista(Lista *);
+Lista * incrementa_inicio(Lista *,int);
 int main()
 {
     int n;
@@ -27,6 +28,8 @@ int main()
     l=retira(l,n);
     imprime_lista(l);
     busca(l);
+    l=incrementa_inicio(l,n);
+    imprime_lista(l);
         return 0;
 }
 
@@ -132,4 +135,20 @@ void busca(Lista *l)
         printf(" \nvalor  nao se encontra na lista\n");
     }
     
+}
+
+Lista * incrementa_inicio(Lista *l,int n)
+{mk 
+    Lista *aux;
+    int cont=n;
+
+    while (cont >= 1)
+    {
+        aux=(Lista*)malloc(sizeof(Lista));
+        aux->info=(float)cont;
+        aux->prox=l;
+        l=aux;
+        cont--;
+    }
+    return l;
 }
