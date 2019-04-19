@@ -8,31 +8,33 @@ struct lista
 };
 typedef struct lista Lista;
 
-//void tamanho_remove(int*);
+void tamanho_remove(int*);
 Lista *preenche_lista();
-
-//Lista * retira(Lista*,int);
+void busca(Lista *);
+Lista * retira(Lista*,int);
 void imprime_lista(Lista *);
 int main()
 {
     int n;
+    
 
     Lista *l;
 
     l = NULL;
-    //tamanho_remove(&n);
+    tamanho_remove(&n);
     l = preenche_lista();
     imprime_lista(l);
-    printf("ok");
-    return 0;
+    l=retira(l,n);
+    imprime_lista(l);
+    busca(l);
+        return 0;
 }
 
-// void tamanho_remove(int *p_n)
-// {
-//     printf("\n Digite quantos elementos deseja remover da lista:\n");
-//     scanf("%d",&*p_n);
-
-// }
+void tamanho_remove(int *p_n)
+{
+    printf("\n Digite quantos elementos deseja remover da lista:\n");
+    scanf("%d",&*p_n);
+}
 
 Lista * preenche_lista()
 {
@@ -66,7 +68,7 @@ Lista * preenche_lista()
 
 void imprime_lista(Lista *l)
 {
-
+    int cont=1;
     if (l == NULL)
     {
         printf("\n Lista vazia\n");
@@ -76,7 +78,8 @@ void imprime_lista(Lista *l)
         printf("\n------------INICIO-------------------\n");
         for (;;)
         {
-            printf("\nelemento info = %.0f\n", l->info);
+            printf("\nno = %d elemento info = %.0f\n",cont, l->info);
+            cont++;
             if (l->prox == NULL)
             {
                 break;
@@ -86,4 +89,47 @@ void imprime_lista(Lista *l)
 
         printf("\n---------------FIM-------------------\n");
     }
+}
+
+Lista * retira(Lista* l,int n)
+{
+    Lista * aux;
+    int cont=1;
+
+    
+    while( l->prox != NULL && cont<= n)
+    {
+        aux=l->prox;
+        free(l);
+        l=aux;      
+        cont++;
+    }
+    return l;
+}
+
+void busca(Lista *l)
+{
+    float busca;
+    int cont=0,teste=0;
+    printf("\n Digite o dado a ser buscado na lista \n");
+    scanf("%f",&busca);
+
+    while (l->prox != NULL)
+    {
+        cont ++;
+        if (l->info == busca)
+        {
+            printf("\n o valor buscado esta no no : %d \n",cont);
+            teste=1;
+            break;
+            
+        }
+        l=l->prox;
+
+    }
+    if (teste == 0)
+    {
+        printf(" \nvalor  nao se encontra na lista\n");
+    }
+    
 }
