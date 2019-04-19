@@ -8,16 +8,15 @@ struct lista
 };
 typedef struct lista Lista;
 
-void tamanho_remove(int*);
+void tamanho_remove(int *);
 Lista *preenche_lista();
 void busca(Lista *);
-Lista * retira(Lista*,int);
+Lista *retira(Lista *, int);
 void imprime_lista(Lista *);
-Lista * incrementa_inicio(Lista *,int);
+Lista *incrementa_inicio(Lista *, int);
 int main()
 {
     int n;
-    
 
     Lista *l;
 
@@ -25,34 +24,33 @@ int main()
     tamanho_remove(&n);
     l = preenche_lista();
     imprime_lista(l);
-    l=retira(l,n);
+    l = retira(l, n);
     imprime_lista(l);
     busca(l);
-    l=incrementa_inicio(l,n);
+    l = incrementa_inicio(l, n);
     imprime_lista(l);
-        return 0;
+    return 0;
 }
 
 void tamanho_remove(int *p_n)
 {
     printf("\n Digite quantos elementos deseja remover da lista:\n");
-    scanf("%d",&*p_n);
+    scanf("%d", &*p_n);
 }
 
-Lista * preenche_lista()
+Lista *preenche_lista()
 {
     int cont = 1;
-    Lista * l;
+    Lista *l;
     Lista *inicio;
-    
+
     Lista *aux;
-    l= (Lista *)malloc(sizeof(Lista));
-    inicio=l;
-    
+    l = (Lista *)malloc(sizeof(Lista));
+    inicio = l;
 
     l->info = (float)cont;
     l->prox = NULL;
-    
+
     cont++;
     while (cont <= 10)
     {
@@ -62,16 +60,15 @@ Lista * preenche_lista()
         l->prox = aux;
         l = l->prox;
 
-
         cont++;
     }
-    
+
     return inicio;
 }
 
 void imprime_lista(Lista *l)
 {
-    int cont=1;
+    int cont = 1;
     if (l == NULL)
     {
         printf("\n Lista vazia\n");
@@ -81,7 +78,7 @@ void imprime_lista(Lista *l)
         printf("\n------------INICIO-------------------\n");
         for (;;)
         {
-            printf("\nno = %d elemento info = %.0f\n",cont, l->info);
+            printf("\nno = %d elemento info = %.0f\n", cont, l->info);
             cont++;
             if (l->prox == NULL)
             {
@@ -94,17 +91,16 @@ void imprime_lista(Lista *l)
     }
 }
 
-Lista * retira(Lista* l,int n)
+Lista *retira(Lista *l, int n)
 {
-    Lista * aux;
-    int cont=1;
+    Lista *aux;
+    int cont = 1;
 
-    
-    while( l->prox != NULL && cont<= n)
+    while (l->prox != NULL && cont <= n)
     {
-        aux=l->prox;
+        aux = l->prox;
         free(l);
-        l=aux;      
+        l = aux;
         cont++;
     }
     return l;
@@ -113,41 +109,38 @@ Lista * retira(Lista* l,int n)
 void busca(Lista *l)
 {
     float busca;
-    int cont=0,teste=0;
+    int cont = 0, teste = 0;
     printf("\n Digite o dado a ser buscado na lista \n");
-    scanf("%f",&busca);
+    scanf("%f", &busca);
 
     while (l->prox != NULL)
     {
-        cont ++;
+        cont++;
         if (l->info == busca)
         {
-            printf("\n o valor buscado esta no no : %d \n",cont);
-            teste=1;
+            printf("\n o valor buscado esta no no : %d \n", cont);
+            teste = 1;
             break;
-            
         }
-        l=l->prox;
-
+        l = l->prox;
     }
     if (teste == 0)
     {
         printf(" \nvalor  nao se encontra na lista\n");
     }
-    
 }
 
-Lista * incrementa_inicio(Lista *l,int n)
-{mk 
+Lista *incrementa_inicio(Lista *l, int n)
+{
     Lista *aux;
-    int cont=n;
+    int cont = n;
 
     while (cont >= 1)
     {
-        aux=(Lista*)malloc(sizeof(Lista));
-        aux->info=(float)cont;
-        aux->prox=l;
-        l=aux;
+        aux = (Lista *)malloc(sizeof(Lista));
+        aux->info = (float)cont;
+        aux->prox = l;
+        l = aux;
         cont--;
     }
     return l;
